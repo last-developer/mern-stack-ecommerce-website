@@ -19,7 +19,6 @@ const server=app.listen(process.env.PORT,()=>{
     console.log(`server is running on http://localhost:${process.env.PORT}`);
 })
 
-
 // unhanddled promise rejection
 process.on('unhandledRejection',(err)=>{
     console.log(`Error :${err.message}`);
