@@ -1,6 +1,7 @@
 const User = require('../models/userModel')
 const ErrorHander = require('../utils/errorhander')
-const catchAsyncErrors = require('../middleware/catchAsyncErrors')
+const catchAsyncErrors = require('../middleware/catchAsyncErrors');
+const sendToken = require('../utils/jwtToken');
 
 // Register a user
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
@@ -12,12 +13,8 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
             url: "fakeurl"
         }
     })
-    const token = user.getJWTToken();
 
-    res.status(201).json({
-        success: true,
-        token
-    })
+    sendToken(user,201,res);
 })
 
 // Login user
@@ -43,10 +40,19 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
         return next(new ErrorHander("invalid email or password", 401))
     }
 
-    const token = user.getJWTToken();
+    sendToken(user,200,res);
+})
+
+// user logout
+exports.logout=catchAsyncErrors(async(req,res,next)=>{
+    res.cookie('token',null,{
+        expires:new Date(Date.now()),
+        httpOnly:true
+    });
 
     res.status(200).json({
-        success: true,
-        token
+        success:true,
+        message:"Logged out"
     })
+
 })
