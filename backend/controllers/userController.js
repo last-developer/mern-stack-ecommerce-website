@@ -12,8 +12,10 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
             url: "fakeurl"
         }
     })
+    const token=user.getJWTToken();
+
     res.status(200).json({
         success: true,
-        user
+        token
     })
 })
