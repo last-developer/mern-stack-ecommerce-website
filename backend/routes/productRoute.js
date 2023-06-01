@@ -10,9 +10,9 @@ router.route('/products').get(getAllProducts);
 router.route('/product/new').post(isAuthenticatedUser, authorizeRoles('admin'), createProduct);
 
 // route to update,delete and get details of a single product
-router.route('/product/:id').put(isAuthenticatedUser, authorizeRoles('admin'), updateProduct)
+router.route('/product/:id')
+    .put(isAuthenticatedUser, authorizeRoles('admin'), updateProduct)
     .delete(isAuthenticatedUser, authorizeRoles('admin'), deleteProduct)
     .get(isAuthenticatedUser, getProductDetails);
-
 
 module.exports = router
