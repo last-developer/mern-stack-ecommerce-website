@@ -160,3 +160,56 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
         success: true
     })
 })
+
+// get all user details (for admin)
+exports.getAllUser = catchAsyncErrors(async (req, res, next) => {
+    const users = await User.find()
+
+    res.status(200).json({
+        success: true,
+        users
+    })
+})
+
+// get single user details (for admin)
+exports.getSingleUser = catchAsyncErrors(async (req, res, next) => {
+    const user = await User.findById(req.params.id)
+
+    if (!user) {
+        return next(new ErrorHander(`user not exist with id ${req.params.id}`, 400))
+    }
+    res.status(200).json({
+        success: true,
+        user
+    })
+})
+
+// update user role (for admin)
+exports.updateUserRole = catchAsyncErrors(async (req, res, next) => {
+    const newUserData = {
+        name: req.body.name,
+        email: req.body.email,
+        role: req.body.role
+    }
+
+    const user = await User.findByIdAndUpdate(req.params.id, newUserData, { new: true, runValidators: false, useFindAndModify: false })
+    if (!user) {
+        return next(new ErrorHander(`user not exist with id ${req.params.id}`, 400))
+    }
+    res.status(200).json({
+        success: true
+    })
+})
+
+// delete user (for admin)
+exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
+
+    const user = await User.findById(req.params.id)
+    if (!user) {
+        return next(new ErrorHander(`user not exist with id ${req.params.id}`, 400))
+    }
+    await user.deleteOne()
+    res.status(200).json({
+        success: true
+    })
+})
