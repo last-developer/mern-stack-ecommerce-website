@@ -43,6 +43,7 @@ html {
 body {
     background: #000000fc;
     min-width: 300px;
+    font-size: 1.3vmax;
 }
 
 .padding {
@@ -55,6 +56,26 @@ svg,
 video {
     display: block;
     max-width: 100%;
+}
+
+
+/* Header media queries ------ */
+@media (max-width:950px) {
+    body {
+        font-size: 1.7vmax;
+    }
+}
+
+@media (max-width:650px) {
+    body {
+        font-size: 2.2vmax;
+    }
+}
+
+@media (max-width:500px) {
+    body {
+        font-size: 2.7vmax;
+    }
 }
 
 

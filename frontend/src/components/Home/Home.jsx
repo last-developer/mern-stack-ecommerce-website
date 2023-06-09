@@ -1,9 +1,11 @@
 import React from 'react'
+import './Home.css'
+
 
 const Home = () => {
   return (
     <>
-    <div className="categories">
+    <div className="categories padding">
         <ul>
             <li>
                 <a href="#">Phones</a>
@@ -23,7 +25,7 @@ const Home = () => {
         </ul>
     </div>
 
-    <div className="featured-products">
+    <div className="featured-products padding">
         <h2>Featured Products</h2>
         <div className="products-box">
             <div className="product">

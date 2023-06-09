@@ -4,12 +4,12 @@ import "./Header.css"
 const Header = () => {
     return (
         <header className='padding'>
-            <div className="left">
+            <div className="header-left">
                 <div className="logo">
                     <a href="#">Ecommerce</a>
                 </div>
             </div>
-            <div className="middle">
+            <div className="header-middle">
                 <div className="search-bar">
                     <form action="#">
                         <div>
@@ -19,7 +19,7 @@ const Header = () => {
                     </form>
                 </div>
             </div>
-            <div className="right">
+            <div className="header-right">
                 <a href="#" id='login'>Login</a>
                 <a href="#" id='cart'>Cart</a>
             </div>
