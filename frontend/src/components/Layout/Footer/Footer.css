@@ -1,27 +1,30 @@
-footer{
+footer {
     color: white;
-    /* font-size: 1.3vmax; */
+    background-color: rgb(21, 21, 21);
 }
 
-.footer-top{
+.footer-top {
     margin-bottom: 1rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid rgb(83, 83, 83);
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
 }
-.footer-left h4,.footer-right h4{
+
+.footer-left h4,
+.footer-right h4 {
     margin-bottom: .5rem;
 }
 
-.footer-left p,.footer-right p{
+.footer-left p,
+.footer-right p {
     color: gray;
     line-height: 1.7;
 }
 
-.footer-bottom-content{
-display: flex;
-align-items: center;
-justify-content: space-between;
+.footer-bottom-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
