@@ -1,6 +1,7 @@
 import React from 'react'
 import './Home.css'
 import ProductCard from './ProductCard'
+import MetaData from '../Layout/MetaData'
 
 const product={
     name:"myphone",
@@ -11,6 +12,7 @@ const product={
 const Home = () => {
   return (
     <>
+    <MetaData title='Ecommerce - Home'/>
     <div className="categories padding">
         <ul>
             <li>
