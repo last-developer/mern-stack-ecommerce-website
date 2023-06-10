@@ -5,15 +5,21 @@ import ProductCard from './ProductCard'
 import MetaData from '../Layout/MetaData'
 import { getProduct } from '../../actions/ProductAction'
 import Loader from '../Layout/Loader/Loader';
+import { useAlert } from 'react-alert'
 
 
 const Home = () => {
+    const alert = useAlert()
     const dispatch = useDispatch();
     const { loading, products, error, productsCount } = useSelector((state) => state.products);
 
     useEffect(() => {
+        if (error) {
+            return alert.error(error)
+        }
+
         dispatch(getProduct());
-    }, [dispatch]);
+    }, [dispatch, error]);
 
     return (
         <>
