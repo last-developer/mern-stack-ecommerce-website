@@ -37,7 +37,7 @@ a {
 
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 3.5rem;
+    /* scroll-padding-top: 3.5rem; */
 }
 
 body {
@@ -59,7 +59,8 @@ video {
 }
 
 
-/* Header media queries ------ */
+/* Media queries ------ */
+
 @media (max-width:950px) {
     body {
         font-size: 1.7vmax;

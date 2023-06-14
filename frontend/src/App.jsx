@@ -8,6 +8,7 @@ import Header from "./components/Layout/Header/Header";
 import Footer from "./components/Layout/Footer/Footer";
 import Home from "./components/Home/Home";
 import Nopage from './components/Nopage/Nopage';
+import ProductDetails from './components/Product/ProductDetails';
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
         <Header />
         <Routes>
           <Route path='/' element={<Home />} />
+          <Route path='/product/:id' element={<ProductDetails />} />
           <Route path="*" element={<Nopage />} />
         </Routes>
         <Footer />
