@@ -158,6 +158,7 @@
 
 .reviewsHeading {
   color: #000000be;
+  background-color: white;
   font: 500 1.4vmax "Roboto";
   text-align: center;
   border-bottom: 1px solid rgba(0, 0, 0, 0.226);
@@ -170,6 +171,7 @@
 .reviews {
   display: flex;
   overflow: auto;
+  background-color: white;
 }
 
 .reviewCard {
@@ -202,6 +204,7 @@
   font: 400 1.3vmax "Gill Sans";
   text-align: center;
   color: rgba(0, 0, 0, 0.548);
+  margin-bottom: 5vmax;
 }
 
 @media screen and (max-width: 600px) {
