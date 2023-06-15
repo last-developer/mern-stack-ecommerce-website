@@ -3,6 +3,7 @@
     justify-content: space-evenly;
     padding: 1rem;
     border-bottom: 1px solid rgb(71, 71, 71);
+    background-color: black;
 }
 
 .categories ul li a {

@@ -3,9 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import './Home.css'
 import ProductCard from './ProductCard'
 import MetaData from '../Layout/MetaData'
-import { getProduct } from '../../actions/ProductAction'
+import { clearErrors, getProduct } from '../../actions/ProductAction'
 import Loader from '../Layout/Loader/Loader';
 import { useAlert } from 'react-alert'
+import { Link } from "react-router-dom";
+
 
 
 const Home = () => {
@@ -15,7 +17,8 @@ const Home = () => {
 
     useEffect(() => {
         if (error) {
-            return alert.error(error)
+             alert.error(error)
+             dispatch(clearErrors())
         }
 
         dispatch(getProduct());
@@ -40,6 +43,9 @@ const Home = () => {
                     </li>
                     <li>
                         <a href="#">Furniture</a>
+                    </li>
+                    <li>
+                        <Link to="/products">View All Products</Link>
                     </li>
                 </ul>
             </div>

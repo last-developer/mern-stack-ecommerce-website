@@ -2,15 +2,17 @@ import React, { Fragment, useEffect } from 'react';
 import Carousel from "react-material-ui-carousel";
 
 import { useSelector, useDispatch } from 'react-redux';
-import { getProductDetails } from '../../actions/ProductAction';
+import { clearErrors, getProductDetails } from '../../actions/ProductAction';
 import "./productdetails.css"
 import Loader from '../Layout/Loader/Loader';
 
 import { useParams } from 'react-router-dom';
 import { Rating } from '@mui/material';
 import ReviewCard from './ReviewCard';
+import { useAlert } from 'react-alert';
 
 const ProductDetails = () => {
+    const alert = useAlert()
     const dispatch = useDispatch();
     const { loading, product, error } = useSelector((state) => state.productDetails);
     const { id } = useParams();
@@ -22,29 +24,33 @@ const ProductDetails = () => {
     };
 
     useEffect(() => {
+        if (error) {
+            alert.error(error)
+            dispatch(clearErrors())
+        }
         if (id) {
             dispatch(getProductDetails(id));
         }
-    }, [dispatch, id]);
+    }, [dispatch, id, error, alert]);
 
     return (
         <>
             {loading ? (<Loader />) : (
                 <>
                     <div className="ProductDetails">
-                        <div>
-                            <Carousel>
-                                {product.images &&
-                                    product.images.map((item, i) => (
-                                        <img
-                                            className="CarouselImage"
-                                            key={i}
-                                            src={item.url}
-                                            alt={`${i} Slide`}
-                                        />
-                                    ))}
-                            </Carousel>
-                        </div>
+                        {/* <div> */}
+                        <Carousel>
+                            {product.images &&
+                                product.images.map((item, i) => (
+                                    <img
+                                        className="CarouselImage"
+                                        key={i}
+                                        src={item.url}
+                                        alt={`${i} Slide`}
+                                    />
+                                ))}
+                        </Carousel>
+                        {/* </div> */}
 
                         <div>
                             <div className="detailsBlock-1">
