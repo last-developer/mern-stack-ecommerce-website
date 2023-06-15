@@ -26,10 +26,13 @@ export const clearErrors = () => ({
   type: CLEAR_ERRORS
 });
 
-export const getProduct = (keyword='',currentPage=1) => async (dispatch) => {
+export const getProduct = (keyword='',currentPage=1,price=[0,25000],ratings=0,category='') => async (dispatch) => {
   try {
     dispatch(getProductRequest());
-    let link=`http://localhost:4000/api/v1/products?keyword=${keyword}&page=${currentPage}`
+    let link=`http://localhost:4000/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`
+    if (category) {
+      link = `http://localhost:4000/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`;
+    }
     const { data } = await axios.get(link);
     dispatch(getProductSuccess(data.products, data.productsCount));
   } catch (error) {

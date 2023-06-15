@@ -7,33 +7,57 @@ import MetaData from '../Layout/MetaData'
 import ProductCard from '../Home/ProductCard';
 import { useParams } from "react-router-dom";
 import Pagination from "react-js-pagination";
+import { useAlert } from "react-alert";
+import Slider from "@material-ui/core/Slider";
+import Typography from "@material-ui/core/Typography";
 
+const categories = [
+    "Laptop",
+    "Footwear",
+    "Bottom",
+    "Tops",
+    "Attire",
+    "Camera",
+    "SmartPhones",
+];
 
 const Products = () => {
+    const dispatch = useDispatch();
     const { keyword } = useParams();
 
-    const dispatch = useDispatch();
     const [currentPage, setCurrentPage] = useState(1);
-    const setCurrentPageNo = (e) => {
-        setCurrentPage(e);
-    };
-    // const alert = useAlert();
+    const [price, setPrice] = useState([0, 25000]);
+    const [category, setCategory] = useState("");
+    const [ratings, setRatings] = useState(0);
+    const alert = useAlert();
+
     const {
         products,
         loading,
         error,
         productsCount,
-        resultPerPage
+        resultPerPage,
+        filteredProductsCount
     } = useSelector((state) => state.products);
 
-    useEffect(() => {
-        // if (error) {
-        //     alert.error(error);
-        //     dispatch(clearErrors());
-        // }
+    const setCurrentPageNo = (e) => {
+        setCurrentPage(e);
+    };
 
-        dispatch(getProduct(keyword, currentPage));
-    }, [dispatch, keyword, currentPage]);
+    const priceHandler = (event, newPrice) => {
+        setPrice(newPrice);
+    };
+
+    let count = filteredProductsCount;
+
+    useEffect(() => {
+        if (error) {
+            alert.error(error);
+            dispatch(clearErrors());
+        }
+
+        dispatch(getProduct(keyword, currentPage, price, category, ratings));
+    }, [dispatch, keyword, currentPage, price, category, ratings, alert, error]);
 
 
 
@@ -52,7 +76,46 @@ const Products = () => {
                                 ))}
                         </div>
 
-                        {resultPerPage < productsCount && (
+                        <div className="filterBox">
+                            <Typography>Price</Typography>
+                            <Slider
+                                value={price}
+                                onChange={priceHandler}
+                                valueLabelDisplay="auto"
+                                aria-labelledby="range-slider"
+                                min={0}
+                                max={25000}
+                            />
+
+                            <Typography>Categories</Typography>
+                            <ul className="categoryBox">
+                                {categories.map((category) => (
+                                    <li
+                                        className="category-link"
+                                        key={category}
+                                        onClick={() => setCategory(category)}
+                                    >
+                                        {category}
+                                    </li>
+                                ))}
+                            </ul>
+
+                            <fieldset>
+                                <Typography component="legend">Ratings Above</Typography>
+                                <Slider
+                                    value={ratings}
+                                    onChange={(e, newRating) => {
+                                        setRatings(newRating);
+                                    }}
+                                    aria-labelledby="continuous-slider"
+                                    valueLabelDisplay="auto"
+                                    min={0}
+                                    max={5}
+                                />
+                            </fieldset>
+                        </div>
+
+                        {resultPerPage < count && (
                             <div className="paginationBox">
                                 <Pagination
                                     activePage={currentPage}
@@ -70,13 +133,8 @@ const Products = () => {
                                 />
                             </div>
                         )}
-
-
                     </>
                 )}
-
-
-
         </>
     )
 }

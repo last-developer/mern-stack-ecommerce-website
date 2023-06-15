@@ -6,6 +6,7 @@ const initialState = {
     products: [],
     productsCount: 0,
     resultPerPage: 0,
+    filteredProductsCount: 0,
     error: null
 };
 
@@ -21,7 +22,8 @@ export const ProductReducer = createReducer(initialState, (builder) => {
             state.products = action.payload.products;
             state.productsCount = action.payload.productsCount;
             state.error = null;
-            state.resultPerPage=action.payload.resultPerPage
+            state.resultPerPage=action.payload.resultPerPage;
+            state.filteredProductsCount=action.payload.filteredProductsCount
         })
         .addCase(ALL_PRODUCT_FAIL, (state, action) => {
             state.loading = false;
