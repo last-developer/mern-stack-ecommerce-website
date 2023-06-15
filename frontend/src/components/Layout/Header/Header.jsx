@@ -1,27 +1,23 @@
 import React from 'react'
 import "./Header.css"
-
+import { Link } from 'react-router-dom'
+import Search from '../../Product/Search'
 const Header = () => {
     return (
         <header className='padding'>
             <div className="header-left">
                 <div className="logo">
-                    <a href="#">Ecommerce</a>
+                <Link to='/'>Ecommerce</Link>
                 </div>
             </div>
             <div className="header-middle">
-                <div className="search-bar">
-                    <form action="#">
-                        <div>
-                        <input type="text" placeholder="search..." />
-                        <input type="submit" value="search" />
-                        </div>
-                    </form>
-                </div>
+                <Link to='/search'>
+                <i className="fa-solid fa-magnifying-glass"></i>
+                </Link>
             </div>
             <div className="header-right">
-                <a href="#" id='login'>Login</a>
-                <a href="#" id='cart'>Cart</a>
+                <Link to="/login" id='login'>Login</Link>
+                <Link to="/cart" id='cart'>Cart</Link>
             </div>
         </header>
     )

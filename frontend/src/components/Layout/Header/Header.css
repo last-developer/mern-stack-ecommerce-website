@@ -7,10 +7,10 @@ header {
 }
 
 /* .middle ----- */
-.header-middle {
+/* .header-middle {
     border-radius: 10px;
     border: 1px solid black;
-}
+} */
 
 .search-bar form div {
     display: flex;

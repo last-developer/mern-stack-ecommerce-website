@@ -10,6 +10,7 @@ import Home from "./components/Home/Home";
 import Nopage from './components/Nopage/Nopage';
 import ProductDetails from './components/Product/ProductDetails';
 import Products from './components/Product/Products';
+import Search from './components/Product/Search';
 
 function App() {
 
@@ -21,9 +22,11 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/product/:id' element={<ProductDetails />} />
           <Route path='/products' element={<Products />} />
+          <Route path='/search' element={<Search />} />
           <Route path="*" element={<Nopage />} />
         </Routes>
-        <Footer />
+        {!window.location.href.includes('/search') && < Footer />}
+
       </BrowserRouter>
     </>
   )
