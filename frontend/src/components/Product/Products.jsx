@@ -5,8 +5,12 @@ import { clearErrors, getProduct } from "../../actions/ProductAction";
 import Loader from '../Layout/Loader/Loader'
 import MetaData from '../Layout/MetaData'
 import ProductCard from '../Home/ProductCard';
+import { useParams } from "react-router-dom";
+
 
 const Products = () => {
+    const { keyword } = useParams();
+
     const dispatch = useDispatch();
     // const alert = useAlert();
     const {
@@ -15,15 +19,15 @@ const Products = () => {
         error,
         productsCount
     } = useSelector((state) => state.products);
-
+    
     useEffect(() => {
         // if (error) {
         //     alert.error(error);
         //     dispatch(clearErrors());
         // }
 
-        dispatch(getProduct());
-    }, [dispatch]);
+        dispatch(getProduct(keyword));
+    }, [dispatch,keyword]);
 
 
 

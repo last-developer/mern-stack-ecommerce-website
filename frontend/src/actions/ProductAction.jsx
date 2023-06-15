@@ -26,10 +26,11 @@ export const clearErrors = () => ({
   type: CLEAR_ERRORS
 });
 
-export const getProduct = () => async (dispatch) => {
+export const getProduct = (keyword='') => async (dispatch) => {
   try {
     dispatch(getProductRequest());
-    const { data } = await axios.get('http://localhost:4000/api/v1/products/');
+    let link=`http://localhost:4000/api/v1/products?keyword=${keyword}`
+    const { data } = await axios.get(link);
     dispatch(getProductSuccess(data.products, data.productsCount));
   } catch (error) {
     dispatch(getProductFail(error.response.data.message));
