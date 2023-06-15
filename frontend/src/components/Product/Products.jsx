@@ -11,7 +11,6 @@ import Pagination from "react-js-pagination";
 
 const Products = () => {
     const { keyword } = useParams();
-
     const dispatch = useDispatch();
     const [currentPage, setCurrentPage] = useState(1);
     const setCurrentPageNo = (e) => {
