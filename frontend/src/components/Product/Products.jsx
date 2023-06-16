@@ -13,9 +13,6 @@ const Products = () => {
     const { keyword } = useParams();
     const dispatch = useDispatch();
     const [currentPage, setCurrentPage] = useState(1);
-    const setCurrentPageNo = (e) => {
-        setCurrentPage(e);
-    };
     // const alert = useAlert();
     const {
         products,
@@ -24,6 +21,10 @@ const Products = () => {
         productsCount,
         resultPerPage
     } = useSelector((state) => state.products);
+    
+    const setCurrentPageNo = (pageNumber) => {
+        setCurrentPage(pageNumber);
+      };
 
     useEffect(() => {
         // if (error) {

@@ -12,10 +12,11 @@ export const getProductRequest = () => ({
   type: ALL_PRODUCT_REQUEST
 });
 
-export const getProductSuccess = (products, productsCount) => ({
+export const getProductSuccess = (products, productsCount, resultPerPage) => ({
   type: ALL_PRODUCT_SUCCESS,
-  payload: { products, productsCount }
+  payload: { products, productsCount, resultPerPage }
 });
+
 
 export const getProductFail = (error) => ({
   type: ALL_PRODUCT_FAIL,
@@ -31,7 +32,7 @@ export const getProduct = (keyword='',currentPage=1) => async (dispatch) => {
     dispatch(getProductRequest());
     let link=`http://localhost:4000/api/v1/products?keyword=${keyword}&page=${currentPage}`
     const { data } = await axios.get(link);
-    dispatch(getProductSuccess(data.products, data.productsCount));
+    dispatch(getProductSuccess(data.products, data.productsCount,data.resultPerPage));
   } catch (error) {
     dispatch(getProductFail(error.response.data.message));
   }
