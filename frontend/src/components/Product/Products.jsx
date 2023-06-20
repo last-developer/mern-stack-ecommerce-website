@@ -7,24 +7,31 @@ import MetaData from '../Layout/MetaData'
 import ProductCard from '../Home/ProductCard';
 import { useParams } from "react-router-dom";
 import Pagination from "react-js-pagination";
+import Slider from '@mui/material/Slider';
 
 
 const Products = () => {
     const { keyword } = useParams();
     const dispatch = useDispatch();
     const [currentPage, setCurrentPage] = useState(1);
+    const [price, setPrice] = useState([0, 100000]);
     // const alert = useAlert();
+
     const {
         products,
         loading,
         error,
         productsCount,
-        resultPerPage
+        resultPerPage,
     } = useSelector((state) => state.products);
-    
+
     const setCurrentPageNo = (pageNumber) => {
         setCurrentPage(pageNumber);
-      };
+    };
+
+    const handlePriceChange = (event, newValue) => {
+        setPrice(newValue);
+    };
 
     useEffect(() => {
         // if (error) {
@@ -32,8 +39,9 @@ const Products = () => {
         //     dispatch(clearErrors());
         // }
 
-        dispatch(getProduct(keyword, currentPage));
-    }, [dispatch, keyword, currentPage]);
+        dispatch(getProduct(keyword, currentPage, price));
+    }, [dispatch, keyword, currentPage, price]);
+
 
 
 
@@ -46,11 +54,28 @@ const Products = () => {
                         <h2 className="productsHeading">Products</h2>
 
                         <div className="products">
-                            {products &&
+                            {products && products.length > 0 ? (
                                 products.map((product) => (
                                     <ProductCard key={product._id} product={product} />
-                                ))}
+                                ))
+                            ) : (
+                                <p>No products found.</p>
+                            )}
                         </div>
+
+
+                        <div className="priceFilter"> Price
+                            <Slider
+                                value={price}
+                                onChange={handlePriceChange}
+                                aria-labelledby="range-slider"
+                                min={0}
+                                max={100000}
+                                track='false'
+                                valueLabelDisplay='auto'
+                            />
+                        </div>
+
 
                         {resultPerPage < productsCount && (
                             <div className="paginationBox">
@@ -70,13 +95,9 @@ const Products = () => {
                                 />
                             </div>
                         )}
-
-
                     </>
-                )}
-
-
-
+                )
+            }
         </>
     )
 }

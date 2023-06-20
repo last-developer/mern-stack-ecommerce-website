@@ -52,7 +52,7 @@
 
 .productCard>span {
     margin: 0.5vmax;
-    color: yellow;
+    color: tomato;
 }
 
 .productCard:hover {
