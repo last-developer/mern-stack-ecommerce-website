@@ -9,12 +9,23 @@ import { useParams } from "react-router-dom";
 import Pagination from "react-js-pagination";
 import Slider from '@mui/material/Slider';
 
+const categories = [
+    "Laptop",
+    "mp",
+    "Bottom",
+    "Tops",
+    "Attire",
+    "Camera",
+    "Smartphones",
+];
 
 const Products = () => {
     const { keyword } = useParams();
     const dispatch = useDispatch();
     const [currentPage, setCurrentPage] = useState(1);
     const [price, setPrice] = useState([0, 100000]);
+    const [category, setCategory] = useState("");
+
     // const alert = useAlert();
 
     const {
@@ -39,8 +50,8 @@ const Products = () => {
         //     dispatch(clearErrors());
         // }
 
-        dispatch(getProduct(keyword, currentPage, price));
-    }, [dispatch, keyword, currentPage, price]);
+        dispatch(getProduct(keyword, currentPage, price, category));
+    }, [dispatch, keyword, currentPage, price, category]);
 
 
 
@@ -63,17 +74,32 @@ const Products = () => {
                             )}
                         </div>
 
+                        <div className="filterBox">
 
-                        <div className="priceFilter"> Price
-                            <Slider
-                                value={price}
-                                onChange={handlePriceChange}
-                                aria-labelledby="range-slider"
-                                min={0}
-                                max={100000}
-                                track='false'
-                                valueLabelDisplay='auto'
-                            />
+                            <div className="priceFilter"> Price
+                                <Slider
+                                    value={price}
+                                    onChange={handlePriceChange}
+                                    aria-labelledby="range-slider"
+                                    min={0}
+                                    max={100000}
+                                    track='normal'
+                                    valueLabelDisplay='auto'
+                                />
+                            </div>
+
+                            <h4>Categories</h4>
+                            <ul className="categoryBox">
+                                {categories.map((category) => (
+                                    <li
+                                        className="category-link"
+                                        key={category}
+                                        onClick={() => setCategory(category)}
+                                    >
+                                        {category}
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
 
 

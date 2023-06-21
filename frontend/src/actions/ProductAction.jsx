@@ -14,8 +14,8 @@ export const getProductRequest = () => ({
 
 export const getProductSuccess = (products, productsCount, resultPerPage) => ({
   type: ALL_PRODUCT_SUCCESS,
-  payload: { products, productsCount, resultPerPage}
-  
+  payload: { products, productsCount, resultPerPage }
+
 });
 
 
@@ -29,14 +29,18 @@ export const clearErrors = () => ({
   type: CLEAR_ERRORS
 });
 
-export const getProduct = (keyword = '', currentPage = 1, price = [0, 100000]) => async (dispatch) => {
+export const getProduct = (keyword = '', currentPage = 1, price = [0, 100000], category = '') => async (dispatch) => {
   try {
-    dispatch(getProductRequest()); 
-    const link = `http://localhost:4000/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}`;
+    dispatch(getProductRequest());
+    let link = `http://localhost:4000/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}`;
+    if (category !== '') {
+      link += `&category=${category}`;
+    }
     const { data } = await axios.get(link);
     dispatch(getProductSuccess(data.products, data.productsCount, data.resultPerPage));
   } catch (error) {
-    dispatch(getProductFail(error.response.data.message));
+    const errorMessage = error.response && error.response.data.message ? error.response.data.message : 'Something went wrong';
+    dispatch(getProductFail(errorMessage));
   }
 };
 
