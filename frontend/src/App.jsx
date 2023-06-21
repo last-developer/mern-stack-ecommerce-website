@@ -11,6 +11,7 @@ import Nopage from './components/Nopage/Nopage';
 import ProductDetails from './components/Product/ProductDetails';
 import Products from './components/Product/Products';
 import Search from './components/Product/Search';
+import LoginSignUp from './components/User/LoginSignUp';
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
           <Route path='/products' element={<Products />} />
           <Route path='/products/:keyword' element={<Products />} />
           <Route path='/search' element={<Search />} />
+          <Route path='/login' element={<LoginSignUp />} />
           <Route path="*" element={<Nopage />} />
         </Routes>
         {!window.location.href.includes('/search') && < Footer />}
