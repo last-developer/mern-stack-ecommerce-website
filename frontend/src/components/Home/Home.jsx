@@ -13,23 +13,23 @@ import { Link } from "react-router-dom";
 const Home = () => {
     const alert = useAlert()
     const dispatch = useDispatch();
-    const { loading, products, error, productsCount } = useSelector((state) => state.products);
+    const { loading, products, error } = useSelector((state) => state.products);
 
     useEffect(() => {
         if (error) {
-             alert.error(error)
-             dispatch(clearErrors())
+            alert.error(error)
+            dispatch(clearErrors())
         }
 
         dispatch(getProduct());
-    }, [dispatch, error,alert]);
+    }, [dispatch, error, alert]);
 
     return (
         <>
             <MetaData title='Ecommerce - Home' />
             <div className="categories ">
                 <ul>
-                    <li>
+                    {/* <li>
                         <a href="#">Electronics</a>
                     </li>
                     <li>
@@ -43,7 +43,7 @@ const Home = () => {
                     </li>
                     <li>
                         <a href="#">Furniture</a>
-                    </li>
+                    </li> */}
                     <li>
                         <Link to="/products">View All Products</Link>
                     </li>

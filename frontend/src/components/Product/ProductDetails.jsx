@@ -10,6 +10,7 @@ import { useParams } from 'react-router-dom';
 import { Rating } from '@mui/material';
 import ReviewCard from './ReviewCard';
 import { useAlert } from 'react-alert';
+import MetaData from '../Layout/MetaData';
 
 const ProductDetails = () => {
     const alert = useAlert()
@@ -37,6 +38,7 @@ const ProductDetails = () => {
         <>
             {loading ? (<Loader />) : (
                 <>
+                    <MetaData title={product.name} />
                     <div className="ProductDetails">
                         {/* <div> */}
                         <Carousel>

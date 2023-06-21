@@ -8,6 +8,7 @@ import ProductCard from '../Home/ProductCard';
 import { useParams } from "react-router-dom";
 import Pagination from "react-js-pagination";
 import Slider from '@mui/material/Slider';
+import { useAlert } from "react-alert";
 
 const categories = [
     "Laptop",
@@ -26,9 +27,7 @@ const Products = () => {
     const [price, setPrice] = useState([0, 100000]);
     const [category, setCategory] = useState("");
     const [ratings, setRatings] = useState(0);
-
-    // const alert = useAlert();
-
+    const alert = useAlert();
     const {
         products,
         loading,
@@ -46,16 +45,13 @@ const Products = () => {
     };
 
     useEffect(() => {
-        // if (error) {
-        //     alert.error(error);
-        //     dispatch(clearErrors());
-        // }
+        if (error) {
+            alert.error(error);
+            dispatch(clearErrors());
+        }
 
         dispatch(getProduct(keyword, currentPage, price, category, ratings));
-    }, [dispatch, keyword, currentPage, price, category, ratings]);
-
-
-
+    }, [dispatch, keyword, currentPage, price, category, ratings, alert, error]);
 
     return (
         <>
@@ -116,7 +112,6 @@ const Products = () => {
                                 />
                             </fieldset>
                         </div>
-
 
                         {resultPerPage < productsCount && (
                             <div className="paginationBox">
