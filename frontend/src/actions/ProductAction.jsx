@@ -29,10 +29,10 @@ export const clearErrors = () => ({
   type: CLEAR_ERRORS
 });
 
-export const getProduct = (keyword = '', currentPage = 1, price = [0, 100000], category = '') => async (dispatch) => {
+export const getProduct = (keyword = '', currentPage = 1, price = [0, 100000], category = '', ratings = 0) => async (dispatch) => {
   try {
     dispatch(getProductRequest());
-    let link = `http://localhost:4000/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}`;
+    let link = `http://localhost:4000/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
     if (category !== '') {
       link += `&category=${category}`;
     }
