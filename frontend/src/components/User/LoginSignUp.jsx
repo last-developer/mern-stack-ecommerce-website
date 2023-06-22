@@ -6,19 +6,15 @@ import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import FaceIcon from '@mui/icons-material/Face';
 import { useDispatch, useSelector } from "react-redux";
-import { clearErrors, login } from "../../actions/UserAction";
+import { clearErrors, login,register } from "../../actions/UserAction";
 import { useAlert } from "react-alert";
-// import { useHistory } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 
 
 const LoginSignUp = () => {
     const dispatch = useDispatch();
     const alert = useAlert();
-    // const history = useHistory();
     const navigate = useNavigate();
-
-
 
     const { error, loading, isAuthenticated } = useSelector(
         (state) => state.user
@@ -56,8 +52,7 @@ const LoginSignUp = () => {
         myForm.set("email", email);
         myForm.set("password", password);
         myForm.set("avatar", avatar);
-        console.log("signup done");
-        // dispatch(register(myForm));
+        dispatch(register(myForm));
     };
 
     const registerDataChange = (e) => {
