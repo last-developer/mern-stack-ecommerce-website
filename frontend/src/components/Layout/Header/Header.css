@@ -1,16 +1,14 @@
 /* Header ----- */
 header {
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(85, 85, 85);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: sticky;
+    left: 0;
+    right: 0;
+    top: 0;
 }
-
-/* .middle ----- */
-/* .header-middle {
-    border-radius: 10px;
-    border: 1px solid black;
-} */
 
 .search-bar form div {
     display: flex;
@@ -33,10 +31,7 @@ header {
 
 /* .header-right --- */
 .header-right {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
+    height: 3rem;
 }
 
 .header-right #login {
@@ -44,17 +39,26 @@ header {
     color: white;
     padding: .15rem .5rem;
     border-radius: 5px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* useroptions */
+.speedDial {
+    width: 50px;
+}
+
+.speedDialIcon {
+    width: 56px;
+    height: 56px;
+    border-radius: 100%;
 }
 
 /* Header media queries ------ */
 @media (max-width:500px) {
     .header-right {
         gap: .5rem;
-    }
-}
-
-@media (max-width:400px) {
-    .header-middle {
-        max-width: 40%;
     }
 }

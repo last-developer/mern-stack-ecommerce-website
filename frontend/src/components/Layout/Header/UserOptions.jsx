@@ -8,12 +8,16 @@ import PersonIcon from '@mui/icons-material/Person';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../../actions/UserAction';
+import "./Header.css"
 
 const UserOptions = ({ user }) => {
     const navigate = useNavigate()
     const [open, setOpen] = useState(false);
     const alert = useAlert();
+    const dispatch = useDispatch();
+
     // const { cartItems } = useSelector((state) => state.cart);
 
 
@@ -52,7 +56,7 @@ const UserOptions = ({ user }) => {
         navigate("/cart");
     }
     function logoutUser() {
-        // dispatch(logout());
+        dispatch(logout());
         alert.success("Logout Successfully");
     }
 
