@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import reactLogo from './assets/react.svg'
@@ -12,8 +12,13 @@ import ProductDetails from './components/Product/ProductDetails';
 import Products from './components/Product/Products';
 import Search from './components/Product/Search';
 import LoginSignUp from './components/User/LoginSignUp';
+import store from "./store";
+import { loadUser } from './actions/UserAction';
 
 function App() {
+  useEffect(() => {
+    store.dispatch(loadUser());
+  }, []);
 
   return (
     <>
