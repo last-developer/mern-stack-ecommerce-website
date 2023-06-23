@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useSelector } from "react-redux";
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -14,8 +15,11 @@ import LoginSignUp from './components/User/LoginSignUp';
 import store from "./store";
 import { loadUser } from './actions/UserAction';
 import Profile from './components/User/Profile';
+import UpdateProfile from './components/User/UpdateProfile';
 
 function App() {
+  const { isAuthenticated, user } = useSelector((state) => state.user);
+
   useEffect(() => {
     store.dispatch(loadUser());
   }, []);
@@ -31,7 +35,8 @@ function App() {
           <Route path='/products/:keyword' element={<Products />} />
           <Route path='/search' element={<Search />} />
           <Route path='/login' element={<LoginSignUp />} />
-          <Route path='/account' element={<Profile />} />
+          {isAuthenticated && <Route path='/account' element={<Profile />} />}
+          {isAuthenticated && <Route path='/me/update' element={<UpdateProfile />} />}
           <Route path="*" element={<Nopage />} />
         </Routes>
         {!window.location.href.includes('/search') && < Footer />}
