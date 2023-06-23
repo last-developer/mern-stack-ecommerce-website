@@ -13,6 +13,7 @@ import Search from './components/Product/Search';
 import LoginSignUp from './components/User/LoginSignUp';
 import store from "./store";
 import { loadUser } from './actions/UserAction';
+import Profile from './components/User/Profile';
 
 function App() {
   useEffect(() => {
@@ -30,6 +31,7 @@ function App() {
           <Route path='/products/:keyword' element={<Products />} />
           <Route path='/search' element={<Search />} />
           <Route path='/login' element={<LoginSignUp />} />
+          <Route path='/account' element={<Profile />} />
           <Route path="*" element={<Nopage />} />
         </Routes>
         {!window.location.href.includes('/search') && < Footer />}
