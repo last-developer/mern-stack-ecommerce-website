@@ -16,6 +16,7 @@ import store from "./store";
 import { loadUser } from './actions/UserAction';
 import Profile from './components/User/Profile';
 import UpdateProfile from './components/User/UpdateProfile';
+import UpdatePassword from './components/User/UpdatePassword';
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -37,6 +38,7 @@ function App() {
           <Route path='/login' element={<LoginSignUp />} />
           {isAuthenticated && <Route path='/account' element={<Profile />} />}
           {isAuthenticated && <Route path='/me/update' element={<UpdateProfile />} />}
+          {isAuthenticated && <Route path='/password/update' element={<UpdatePassword />} />}
           <Route path="*" element={<Nopage />} />
         </Routes>
         {!window.location.href.includes('/search') && < Footer />}
