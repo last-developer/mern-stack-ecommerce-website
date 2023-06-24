@@ -17,6 +17,8 @@ import { loadUser } from './actions/UserAction';
 import Profile from './components/User/Profile';
 import UpdateProfile from './components/User/UpdateProfile';
 import UpdatePassword from './components/User/UpdatePassword';
+import ForgotPassword from './components/User/ForgotPassword';
+import ResetPassword from './components/User/ResetPassword';
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -39,6 +41,8 @@ function App() {
           {isAuthenticated && <Route path='/account' element={<Profile />} />}
           {isAuthenticated && <Route path='/me/update' element={<UpdateProfile />} />}
           {isAuthenticated && <Route path='/password/update' element={<UpdatePassword />} />}
+          <Route path='/password/forgot' element={<ForgotPassword />} />
+          <Route path='/password/reset/:token' element={<ResetPassword />} />
           <Route path="*" element={<Nopage />} />
         </Routes>
         {!window.location.href.includes('/search') && < Footer />}
