@@ -57,7 +57,7 @@ const Home = () => {
             {loading ? <Loader /> :
                 (
                     <div className="featured-products padding">
-                        {products && products.map((product) => <ProductCard product={product} />)}
+                        {products && products.map((product) => <ProductCard product={product} key={product._id}/>)}
                     </div>
                 )
             }
