@@ -22,12 +22,20 @@ import ResetPassword from './components/User/ResetPassword';
 import Cart from "./components/Cart/Cart";
 import Shipping from './components/Cart/Shipping';
 import ConfirmOrder from './components/Cart/ConfirmOrder';
+import axios from 'axios';
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
+  const [stripeApiKey, setStripeApiKey] = useState("");
 
+  async function getStripeApiKey() {
+    const { data } = await axios.get("http://localhost:4000/api/v1/stripeapikey");
+
+    setStripeApiKey(data.stripeApiKey);
+  }
   useEffect(() => {
     store.dispatch(loadUser());
+    getStripeApiKey()
   }, []);
 
   return (
@@ -44,8 +52,8 @@ function App() {
           {isAuthenticated && <Route path='/account' element={<Profile />} />}
           {isAuthenticated && <Route path='/me/update' element={<UpdateProfile />} />}
           {isAuthenticated && <Route path='/password/update' element={<UpdatePassword />} />}
-          {isAuthenticated && <Route path='/login/shipping' element={<Shipping/>} />}
-          {isAuthenticated && <Route path='/order/confirm' element={<ConfirmOrder/>} />}
+          {isAuthenticated && <Route path='/login/shipping' element={<Shipping />} />}
+          {isAuthenticated && <Route path='/order/confirm' element={<ConfirmOrder />} />}
           <Route path='/password/forgot' element={<ForgotPassword />} />
           <Route path='/password/reset/:token' element={<ResetPassword />} />
           <Route path='/cart' element={<Cart />} />
