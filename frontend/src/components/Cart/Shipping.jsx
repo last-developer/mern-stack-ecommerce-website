@@ -12,7 +12,7 @@ import TransferWithinAStationIcon from "@mui/icons-material/TransferWithinAStati
 import { Country, State } from "country-state-city";
 import { useAlert } from "react-alert";
 import { useNavigate } from "react-router-dom";
-// import CheckoutSteps from "../Cart/CheckoutSteps";
+import CheckoutSteps from "../Cart/CheckoutSteps";
 
 const Shipping = () => {
     const dispatch = useDispatch();
@@ -44,7 +44,7 @@ const Shipping = () => {
         <Fragment>
             <MetaData title="Shipping Details" />
 
-            {/* <CheckoutSteps activeStep={0} /> */}
+            <CheckoutSteps activeStep={0} />
 
             <div className="shippingContainer">
                 <div className="shippingBox">
